@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "promise.js",
+  "sourceRoot": "../../../src/babel-plugins",
+  "sources": [
+    "promise.coffee"
+  ],
+  "names": [],
+  "mappings": ""
+}
