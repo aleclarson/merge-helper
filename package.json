@@ -1,0 +1,33 @@
+{
+  "name": "merge-helper",
+  "version": "1.0.0",
+  "main": "js/src/index",
+  "bin": {
+    "merge-helper": "bin/merge-helper"
+  },
+  "dependencies": {
+    "Promise": "aleclarson/Promise#1.0.0",
+    "diff": "^2.2.3",
+    "exec": "aleclarson/exec#1.0.0",
+    "git-utils": "aleclarson/git-utils#1.0.0",
+    "globby": "aleclarson/globby#4.0.0",
+    "in-array": "aleclarson/in-array#1.0.0",
+    "io": "aleclarson/io#1.0.0",
+    "isType": "aleclarson/isType#1.0.0",
+    "log": "aleclarson/log#1.0.0",
+    "micromatch": "aleclarson/micromatch#2.3.8",
+    "minimist": "*",
+    "random": "aleclarson/random#1.0.4",
+    "steal": "aleclarson/steal#1.0.0",
+    "sync": "aleclarson/sync#1.0.0"
+  },
+  "lotus": {
+    "plugins": [
+      "lotus-coffee"
+    ],
+    "implicitDependencies": [
+      "os",
+      "path"
+    ]
+  }
+}
