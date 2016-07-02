@@ -1,8 +1,8 @@
-var exec, fs, git, globby, isType, sync;
+var Promise, deletedPatterns, exec, fs, git, isType, sync, visited;
+
+Promise = require("Promise");
 
 isType = require("isType");
-
-globby = require("globby");
 
 sync = require("sync");
 
@@ -10,36 +10,51 @@ exec = require("exec");
 
 git = require("git-utils");
 
-fs = require("io/sync");
+fs = require("io/async");
 
-if (!isType(args[0], String)) {
-  throw TypeError("Must provide a branch name!");
-}
+deletedPatterns = ["packager", "Libraries/Animated", "Libraries/Fetch", "Libraries/Promise.js", "Libraries/JavaScriptAppEngine/Initialization/parseErrorStack.js", "CONTRIBUTING.md", "Releases.md", "breaking-changes.md", "npm-shrinkwrap.json", "circle.yml", ".travis.yml", "docs", "website", "Examples", "jestSupport", "babel-preset", "IntegrationTests", "**/*/__tests__", "**/*/__mocks__"];
 
 log.moat(1);
 
-log.gray("Merging...");
+log.yellow("cwd = ");
+
+log.white(cwd);
 
 log.moat(1);
 
-module.exports = git.mergeBranch({
-  modulePath: cwd,
-  theirs: args[0]
-}).then(function() {
-  var deletedPatterns;
-  deletedPatterns = ["packager", "Libraries/Animated", "README.md", "CONTRIBUTING.md", "Releases.md", "breaking-changes.md", "npm-shrinkwrap.json", "circle.yml", ".travis.yml", "docs", "website", "Examples", "jestSupport", "**/*/__tests__", "**/*/__mocks__"];
-  return sync.each(ignoredPatterns, function(pattern) {
-    var files;
-    return files = globby.sync(pattern).forEach(function(path) {
-      return exec("git rm -rf " + path, {
+visited = Object.create(null);
+
+module.exports = Promise.chain(deletedPatterns, function(pattern) {
+  log.moat(1);
+  log.yellow("pattern = ");
+  log.white(pattern);
+  log.moat(1);
+  return fs.match(pattern).then(function(files) {
+    return Promise.chain(files, function(file) {
+      if (/node_modules/.test(file)) {
+        return;
+      }
+      if (visited[file]) {
+        return;
+      }
+      visited[file] = true;
+      return exec.async("git rm -rf " + file, {
         cwd: cwd
       }).then(function() {
         log.moat(1);
-        log.white("Ignored path: ");
-        log.yellow(path);
+        log.cyan("git rm -rf ");
+        log.white(file);
+        return log.moat(1);
+      }).fail(function(error) {
+        log.moat(1);
+        log.gray.dim(error.stack);
         return log.moat(1);
       });
     });
+  }).fail(function(error) {
+    log.moat(1);
+    log.gray.dim(error.stack);
+    return log.moat(1);
   });
 });
 

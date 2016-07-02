@@ -4,7 +4,7 @@ require(process.env.LOTUS_PATH + '/lotus-require').register();
 
 var minimist = require('minimist');
 
-var diff = require('../js/src/utils/diff-conflicts');
+var git = require('git-utils');
 
 var options = minimist(process.argv.slice(2));
 var filePath = options._[0];
@@ -13,8 +13,8 @@ if (typeof filePath !== 'string') {
   throw Error('Must provide a file path!');
 }
 
-var code = diff(filePath, options);
+var code = git.diffConflicts(filePath, options);
 
 if (options.print !== false) {
-  console.log(code);
+  console.log(code.join(''));
 }

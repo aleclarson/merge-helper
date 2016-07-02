@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "Promise": "aleclarson/Promise#1.0.0",
-    "diff": "^2.2.3",
     "exec": "aleclarson/exec#1.0.0",
     "git-utils": "aleclarson/git-utils#1.0.0",
     "globby": "aleclarson/globby#4.0.0",
