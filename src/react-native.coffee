@@ -8,6 +8,9 @@ fs = require "io/async"
 
 deletedPatterns = [
 
+  # Use 'react-native-cli' module instead.
+  "local-cli"
+
   # Use 'react-packager' module instead.
   "packager"
 

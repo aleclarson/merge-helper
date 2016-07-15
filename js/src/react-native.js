@@ -12,7 +12,7 @@ git = require("git-utils");
 
 fs = require("io/async");
 
-deletedPatterns = ["packager", "Libraries/Animated", "Libraries/Fetch", "Libraries/Promise.js", "Libraries/JavaScriptAppEngine/Initialization/parseErrorStack.js", "CONTRIBUTING.md", "Releases.md", "breaking-changes.md", "npm-shrinkwrap.json", "circle.yml", ".travis.yml", "docs", "website", "Examples", "jestSupport", "babel-preset", "IntegrationTests", "**/*/__tests__", "**/*/__mocks__"];
+deletedPatterns = ["local-cli", "packager", "Libraries/Animated", "Libraries/Fetch", "Libraries/Promise.js", "Libraries/JavaScriptAppEngine/Initialization/parseErrorStack.js", "CONTRIBUTING.md", "Releases.md", "breaking-changes.md", "npm-shrinkwrap.json", "circle.yml", ".travis.yml", "docs", "website", "Examples", "jestSupport", "babel-preset", "IntegrationTests", "**/*/__tests__", "**/*/__mocks__"];
 
 log.moat(1);
 
@@ -58,4 +58,4 @@ module.exports = Promise.chain(deletedPatterns, function(pattern) {
   });
 });
 
-//# sourceMappingURL=../../map/src/react-native.map
+//# sourceMappingURL=map/react-native.map
